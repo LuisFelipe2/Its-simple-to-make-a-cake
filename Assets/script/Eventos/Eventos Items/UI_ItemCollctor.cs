@@ -16,4 +16,14 @@ public class UI_ItemCollctor : MonoBehaviour
     {
         Debug.Log("Icone para botão de interação");
     }
+
+    public void mostrarErroAoInteragirComEvento()
+    {
+        Debug.Log("Erro para interação equivocada");
+    }
+
+    public void mostrarEventoBotaoPreso()
+    {
+        Debug.Log("Botão está preso");
+    }
 }

@@ -63,4 +63,9 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public void FixCamera()
+    {
+        Debug.Log("Fixar a Camera");
+    }
+
 }
