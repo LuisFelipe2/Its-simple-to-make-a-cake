@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EventoForno : MonoBehaviour
+public class EventoForno : MonoBehaviour, EventController
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public EstadoForno estadoForno;
+    public UI_ItemCollctor UI;
 
-    // Update is called once per frame
-    void Update()
+    public void doAction()
     {
-        
+        EstadoForno novoEstado = estadoForno.mudarDeEstado();
+
+        if (novoEstado == estadoForno)
+        {
+            UI.mostrarErroAoInteragirComEvento();
+        }
+
+        estadoForno = novoEstado;
     }
 }

@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EstadoButijjaoVelho : MonoBehaviour
+public class EstadoButijjaoVelho : MonoBehaviour, EstadoButijao
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Inventario inventario;
 
-    // Update is called once per frame
-    void Update()
+    public EstadoButijao mudarDeEstado()
     {
-        
+        if (inventario.getItem().tag == "FitaAdesiva")
+        {
+            return new EstadoButijãoRemendado();
+        }
+
+        if (inventario.getItem().tag == "CanoNovo")
+        {
+            return new EstadoButijaoNovo();
+        }
+
+        return this;
     }
 }
