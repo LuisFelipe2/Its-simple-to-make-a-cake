@@ -2,28 +2,48 @@ using UnityEngine;
 
 public class UI_ItemCollctor : MonoBehaviour
 {
-    public void mostrarInventario(GameObject item)
+    public Canvas UI_iconeBtnInteracao;
+    public Canvas UI_erroEvento;
+    public Canvas UI_botaoTravado;
+    public Canvas UI_mostrarInventario;
+    public Canvas UI_arremecarItem;
+
+    public void desligarEventos()
     {
-        Debug.Log("Animação do item indo para o inventário");
+        selectUI(UI_Enum.NOTHING);
     }
 
-    public void arremessarItem(Item item)
+    public void mostrarInventario()
     {
-        Debug.Log("Animação do item indo para o inventário");
+        selectUI(UI_Enum.INVENTARIO);
+    }
+
+    public void arremessarItem()
+    {
+        selectUI(UI_Enum.DROP_ITEM);
     }
 
     public void mostrarEvento()
     {
-        Debug.Log("Icone para botão de interação");
+        selectUI(UI_Enum.BTN_INTERACAO);
     }
 
     public void mostrarErroAoInteragirComEvento()
     {
-        Debug.Log("Erro para interação equivocada");
+        selectUI(UI_Enum.ERRO_EVENTO);
     }
 
     public void mostrarEventoBotaoPreso()
     {
-        Debug.Log("Botão está preso");
+        selectUI(UI_Enum.BTN_TRAVADO);
+    }
+
+    private void selectUI(UI_Enum ui_enum)
+    {
+        UI_botaoTravado.gameObject.SetActive(UI_Enum.BTN_TRAVADO == ui_enum);
+        UI_iconeBtnInteracao.gameObject.SetActive(UI_Enum.BTN_INTERACAO == ui_enum);
+        UI_erroEvento.gameObject.SetActive(UI_Enum.ERRO_EVENTO == ui_enum);
+        UI_mostrarInventario.gameObject.SetActive(UI_Enum.INVENTARIO == ui_enum);
+        UI_arremecarItem.gameObject.SetActive(UI_Enum.DROP_ITEM == ui_enum);
     }
 }

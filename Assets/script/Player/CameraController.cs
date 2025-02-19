@@ -35,12 +35,24 @@ public class CameraController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+        Debug.Log("Teste");
+
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.GetComponent<EventController>() == null)
+            Debug.Log(hit.collider.tag);
+
+            if (hit.collider.GetComponent<ItemCollector>() != null)
             {
                 UI.mostrarEvento();
             }
+            else
+            {
+                UI.desligarEventos();
+            }
+        }
+        else
+        {
+            UI.desligarEventos();
         }
     }
 

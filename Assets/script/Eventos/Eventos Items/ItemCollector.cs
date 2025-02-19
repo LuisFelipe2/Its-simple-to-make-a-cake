@@ -6,14 +6,20 @@ public class ItemCollector : MonoBehaviour, EventController
     public UI_ItemCollctor UI;
     public Item item;
 
+    void Start()
+    {
+        UI = FindObjectOfType<UI_ItemCollctor>();
+        inventario = FindObjectOfType<Inventario>();
+    }
+
     public void doAction()
     {
         Item item = this.item;
-        UI.mostrarInventario(gameObject);
+        UI.mostrarInventario();
 
         if (inventario.possuiItem())
         {
-            UI.arremessarItem(inventario.getItem());
+            UI.arremessarItem();
             inventario.soltarItem();
             this.item = inventario.getItem();
         }
