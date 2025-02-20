@@ -22,55 +22,61 @@ public class CameraController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
         xRotation += mouseX;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
         yRotation -= mouseY;
         yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(yRotation, xRotation, 0f);
-        playerBody.Rotate(new Vector3(mouseX, mouseY, 0));
+    }
 
-
-        /// Verificar Hover
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    private void FixedUpdate()
+    {
+        // Lança o Raycast a partir do centro da tela
+        Ray ray = new Ray(this.GetComponent<Camera>().transform.position, GetComponent<Camera>().transform.forward);
         RaycastHit hit;
 
-        Debug.Log("Teste");
+        Debug.Log("Lançando Raycast...");
+        Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 2f);
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~0)) // Detecta todas as Layers
         {
-            Debug.Log(hit.collider.tag);
+            Debug.Log("Objeto atingido: " + hit.collider.name);
+            Debug.Log("Tag do objeto: " + hit.collider.tag);
 
-            if (hit.collider.GetComponent<ItemCollector>() != null)
+            ItemCollector item = hit.collider.GetComponent<ItemCollector>();
+            if (item != null)
             {
+                Debug.Log("ItemCollector encontrado!");
                 UI.mostrarEvento();
             }
             else
             {
+                Debug.Log("ItemCollector NÃO encontrado.");
                 UI.desligarEventos();
             }
         }
         else
         {
+            Debug.Log("Nenhum objeto atingido.");
             UI.desligarEventos();
         }
     }
 
     public void interagir()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.GetComponent<EventController>() == null)
+            EventController interactable = hit.collider.GetComponent<EventController>();
+
+            if (interactable == null)
             {
                 Debug.Log("Colocar Som de erro");
                 return;
             }
 
-            EventController interactable = hit.collider.GetComponent<EventController>();
-            Debug.Log("Colocar Som de erro");
+            Debug.Log("Interagindo com: " + hit.collider.name);
             interactable.doAction();
         }
     }
@@ -79,5 +85,4 @@ public class CameraController : MonoBehaviour
     {
         Debug.Log("Fixar a Camera");
     }
-
 }
