@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     private float xRotation = 0f;
     private float yRotation = 0f;
 
+    private EventController eventc;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -42,22 +44,39 @@ public class CameraController : MonoBehaviour
             Debug.Log("Objeto atingido: " + hit.collider.name);
             Debug.Log("Tag do objeto: " + hit.collider.tag);
 
-            ItemCollector item = hit.collider.GetComponent<ItemCollector>();
+            EventController item = hit.collider.GetComponent<EventController>();
             if (item != null)
             {
                 Debug.Log("ItemCollector encontrado!");
+
                 UI.mostrarEvento();
+                eventc = item;
             }
             else
             {
                 Debug.Log("ItemCollector NÃO encontrado.");
                 UI.desligarEventos();
+                eventc = null;
             }
         }
         else
         {
             Debug.Log("Nenhum objeto atingido.");
             UI.desligarEventos();
+            eventc = null;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (eventc == null)
+            {
+                UI.mostrarErroAoInteragirComEvento();
+            }
+            else
+            {
+                eventc.doAction();
+            }
         }
     }
 
@@ -79,10 +98,5 @@ public class CameraController : MonoBehaviour
             Debug.Log("Interagindo com: " + hit.collider.name);
             interactable.doAction();
         }
-    }
-
-    public void FixCamera()
-    {
-        Debug.Log("Fixar a Camera");
     }
 }

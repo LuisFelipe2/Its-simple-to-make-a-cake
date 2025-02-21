@@ -7,9 +7,7 @@ public class EstadoBotaoFornoComCola : MonoBehaviour, EstadoEventoBotão
 
     public EstadoEventoBotão mudarDeEstado()
     {
-        cam.FixCamera();
-
-        if (inventario.getItem().tag == "Botão")
+        if (inventario.getItem() != null && inventario.getItem().tag == "Botão")
         {
             return new EstadoBotaoFornoBotaoSolto();
         }

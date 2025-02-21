@@ -4,17 +4,24 @@ public class EstadoFornoDesligado : MonoBehaviour, EstadoForno
 {
     private EventoButijao eventoButijao;
     private Inventario inventario;
-
     private GameController gameController;
+
+    private void Start()
+    {
+        eventoButijao = FindObjectOfType<EventoButijao>();
+        inventario = FindObjectOfType<Inventario>();
+        gameController = FindObjectOfType<GameController>();
+    }
 
     public EstadoForno mudarDeEstado()
     {
 
-        if (inventario.getItem().tag == "Fosforo")
+        if (inventario.getItem() != null && inventario.getItem().tag == "Fosforo")
         {
-            if (eventoButijao.GetEstadoButijaoAtual().tag == "Novo")
+            if (eventoButijao.GetEstadoButijaoAtual() is EstadoButijaoNovo)
             {
-                return new EstadoFornoLigado();
+                gameController.EndGame("Final Bom");
+                return GetComponent<EstadoFornoLigado>();
             }
             else
             {

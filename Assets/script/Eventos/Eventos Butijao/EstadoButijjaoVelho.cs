@@ -4,16 +4,21 @@ public class EstadoButijjaoVelho : MonoBehaviour, EstadoButijao
 {
     public Inventario inventario;
 
+    private void Start()
+    {
+        inventario = FindObjectOfType<Inventario>();
+    }
+
     public EstadoButijao mudarDeEstado()
     {
-        if (inventario.getItem().tag == "FitaAdesiva")
+        if (inventario.getItem() != null && inventario.getItem().tag == "FitaAdesiva")
         {
-            return new EstadoButijãoRemendado();
+            return GetComponent<EstadoButijãoRemendado>();
         }
 
-        if (inventario.getItem().tag == "CanoNovo")
+        if (inventario.getItem() != null && inventario.getItem().tag == "CanoNovo")
         {
-            return new EstadoButijaoNovo();
+            return GetComponent<EstadoButijaoNovo>();
         }
 
         return this;

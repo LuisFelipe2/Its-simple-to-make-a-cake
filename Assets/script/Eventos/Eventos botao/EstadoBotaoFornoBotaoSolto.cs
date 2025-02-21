@@ -7,7 +7,6 @@ public class EstadoBotaoFornoBotaoSolto : MonoBehaviour, EstadoEventoBotão
 
     public EstadoEventoBotão mudarDeEstado()
     {
-        cam.FixCamera();
         Debug.Log("Anim de cair o botão");
         return new EstadoBotaoFornoSemBotao();
     }
