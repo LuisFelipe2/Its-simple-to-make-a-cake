@@ -16,7 +16,7 @@ public class EstadoFornoDesligado : MonoBehaviour, EstadoForno
     public EstadoForno mudarDeEstado()
     {
 
-        if (inventario.getItem() != null && inventario.getItem().tag == "Fosforo")
+        if (inventario.getItem() == "Fosforo")
         {
             if (eventoButijao.GetEstadoButijaoAtual() is EstadoButijaoNovo)
             {

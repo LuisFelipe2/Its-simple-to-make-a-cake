@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class Inventario : MonoBehaviour
 {
-    public Item item;
+    public string item;
 
     public bool possuiItem()
     {
         return item != null;
     }
 
-    public void pegarItem(Item item)
+    public void pegarItem(string item)
     {
+        Debug.Log("Chegou aqui o item; " + item);
         this.item = item;
     }
 
@@ -19,7 +20,7 @@ public class Inventario : MonoBehaviour
         item = null;
     }
 
-    public Item getItem()
+    public string getItem()
     {
         return item;
     }

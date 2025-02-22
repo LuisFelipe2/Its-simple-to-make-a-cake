@@ -11,12 +11,12 @@ public class EstadoButijjaoVelho : MonoBehaviour, EstadoButijao
 
     public EstadoButijao mudarDeEstado()
     {
-        if (inventario.getItem() != null && inventario.getItem().tag == "FitaAdesiva")
+        if (inventario.getItem() == "FitaAdesiva")
         {
             return GetComponent<EstadoButijãoRemendado>();
         }
 
-        if (inventario.getItem() != null && inventario.getItem().tag == "CanoNovo")
+        if (inventario.getItem() == "CanoNovo")
         {
             return GetComponent<EstadoButijaoNovo>();
         }

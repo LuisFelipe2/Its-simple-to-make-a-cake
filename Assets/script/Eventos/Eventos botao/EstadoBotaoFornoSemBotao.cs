@@ -3,22 +3,26 @@ using UnityEngine;
 public class EstadoBotaoFornoSemBotao : MonoBehaviour, EstadoEventoBotão
 {
     public int tempoDeAnimacaoEmMs = 3000;
-    public CameraController cam;
     public Inventario inventario;
+    private Animator animator;
 
     void Start()
     {
+        animator = GameObject.FindWithTag("Button").GetComponent<Animator>();
         inventario = FindFirstObjectByType<Inventario>();
-        cam = FindFirstObjectByType<CameraController>();
     }
 
     public EstadoEventoBotão mudarDeEstado()
     {
-        if (inventario.getItem() != null && inventario.getItem().tag == "Botão")
+        Debug.Log("EstadoBotaoFornoSemBotao");
+        Debug.Log("iventario: " + inventario.getItem());
+        if (inventario.getItem() == "Button")
         {
+            animator.SetTrigger("put_button");
+            gameObject.SetActive(true);
             return new EstadoBotaoFornoBotaoSolto();
         }
-        else if (inventario.getItem() != null && inventario.getItem().tag == "Cola")
+        else if (inventario.getItem() == "Cola")
         {
             return new EstadoBotaoFornoComCola();
         }

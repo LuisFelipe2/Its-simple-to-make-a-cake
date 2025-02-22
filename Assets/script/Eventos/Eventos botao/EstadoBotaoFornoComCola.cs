@@ -7,7 +7,7 @@ public class EstadoBotaoFornoComCola : MonoBehaviour, EstadoEventoBotão
 
     public EstadoEventoBotão mudarDeEstado()
     {
-        if (inventario.getItem() != null && inventario.getItem().tag == "Botão")
+        if (inventario.getItem() == "Botão")
         {
             return new EstadoBotaoFornoBotaoSolto();
         }

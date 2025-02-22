@@ -3,7 +3,7 @@ using UnityEngine;
 public class EventoForno : MonoBehaviour, EventController
 {
     public EstadoForno estadoForno;
-    public UI_ItemCollctor UI;
+    private UI_ItemCollctor UI;
 
     private void Start()
     {

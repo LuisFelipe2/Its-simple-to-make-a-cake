@@ -4,8 +4,6 @@ public class CameraController : MonoBehaviour
 {
     private UI_ItemCollctor UI;
     public float sensitivity = 100f;
-    public Transform playerBody;
-
     private float xRotation = 0f;
     private float yRotation = 0f;
 
@@ -36,32 +34,26 @@ public class CameraController : MonoBehaviour
         Ray ray = new Ray(this.GetComponent<Camera>().transform.position, GetComponent<Camera>().transform.forward);
         RaycastHit hit;
 
-        Debug.Log("Lançando Raycast...");
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 2f);
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~0)) // Detecta todas as Layers
         {
-            Debug.Log("Objeto atingido: " + hit.collider.name);
-            Debug.Log("Tag do objeto: " + hit.collider.tag);
-
             EventController item = hit.collider.GetComponent<EventController>();
+            Debug.Log("Objeto atingido: " + hit.collider.name);
+
             if (item != null)
             {
-                Debug.Log("ItemCollector encontrado!");
-
                 UI.mostrarEvento();
                 eventc = item;
             }
             else
             {
-                Debug.Log("ItemCollector NÃO encontrado.");
                 UI.desligarEventos();
                 eventc = null;
             }
         }
         else
         {
-            Debug.Log("Nenhum objeto atingido.");
             UI.desligarEventos();
             eventc = null;
         }

@@ -11,7 +11,7 @@ public class EstadoButijãoRemendado : MonoBehaviour, EstadoButijao
 
     public EstadoButijao mudarDeEstado()
     {
-        if (inventario != null && inventario.getItem().tag == "CanoNovo")
+        if (inventario.getItem() == "CanoNovo")
         {
             return new EstadoButijaoNovo();
         }
